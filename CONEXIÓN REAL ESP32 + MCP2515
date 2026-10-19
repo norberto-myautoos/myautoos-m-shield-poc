@@ -1,0 +1,13 @@
+ESP32 Pin -> MCP2515 Pin
+GPIO5 (CS) -> CS
+GPIO18 (CLK) -> SCK
+GPIO19 (MISO) -> SO
+GPIO23 (MOSI) -> SI
+GND -> GND
+3.3V -> VCC
+GPIO4 (INT + SAFE-CUT) -> INT + Relé corte VCU
+
+MCP2515 -> TJA1050 -> Bus CAN Kia EV3
+CAN_H -> CAN_H Kia
+CAN_L -> CAN_L Kia
+120Ω entre CAN_H y CAN_L
