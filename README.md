@@ -36,5 +36,5 @@ Licencia por VIN: $400 USD/VIN - Fase 4: 500 VCUs = $21.25M MXN/mes
 
 Fase 3 HIL: En financiamiento NAFIN $45k MXN - PO Kia $850k MXN en proceso
 # Opcion A: En desarrollo - Financiado por PO Kia $850k MXN 
-# Opción B:Inicio $45k MXN NAFIN
+# Opción B: Inicio $45k MXN NAFIN
 # Disponible Q1 2025 - PoC validado 53.2ms ASIL-D
