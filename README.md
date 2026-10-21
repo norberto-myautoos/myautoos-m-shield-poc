@@ -1,4 +1,7 @@
 # MyAutoOS M-SHIELD VCU - Kia EV3 Tier2 Supplier Validated
+![Banco ESP32](docs/conexiones.png)
+
+> Banco de pruebas seguro - ESP32 DevKit V1 con 2 LEDs y botón. Timer 53ms con millis()
 
 **Founder:** Norberto Bravo Tadeo - Cherán, Michoacán - Pueblo P'urhépecha - ITSU Uruapan  
 **Company:** MyAutoOS Technologies S.A.S. - RFC: MAO240101TQ8  
