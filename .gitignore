@@ -1,0 +1,41 @@
+# Arduino IDE - Binarios generados
+*.bin
+*.elf
+*.hex
+*.eep
+*.lst
+*.sym
+*.lss
+*.o
+*.a
+*.d
+*.map
+
+# Carpetas de compilación
+build/
+.pio/
+.pioenvs/
+.piolibdeps/
+
+# VS Code / PlatformIO
+.vscode/
+.idea/
+*.code-workspace
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arduino
+*.hex
+*.eep
+__pycache__/
+*.zip
+
+# No ignorar el código fuente
+!*.ino
+!*.h
+!*.cpp
+!diagram.json
+!README.md
