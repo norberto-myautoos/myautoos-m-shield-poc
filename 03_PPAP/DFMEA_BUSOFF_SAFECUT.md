@@ -1,8 +1,14 @@
-DFMEA - MyAutoOS M-SHIELD VCU - KIA EV3 Pesquería
-Supplier: Norberto Bravo Tadeo - Cherán
-Part: VCU M-SHIELD 18790-02850 - 20 VCUs HILItemFailure ModeFailure Effect (Veh)SEVCauseOCCCurrent ControlDETRPNAction 20 VCUs HILCAN BUSBUS-OFF EFL_TXBO 0x20VCU offline, EV3 no traction9Colisión ID 0x100 vs BMS 100ms4LAT 53.2ms prime timing ID 0x100 avoid collision272Validado CANoe 10min Log 500KbpsCAN BUSBUS-OFF no recoveryVCU stuck offline9Recovery no implementado3Recovery Tier1 500ms x3 no reset auto-rejoin <200ms254Test real MCP2515 REG CANINTFJITTERJitter >150msBMS desync, SOC erróneo8Timer bloqueante4Timer no bloqueante 98ms avg <150ms limit264CANoe jitter histogramSAFE-CUTSOC<20% no cutSobre-descarga celda 349Lógica SOC no leída3SAFE-CUT BMS Cell 34 1A 0.8k + GPIO4 Active LOW <50ms254Test Cell 34 1A realSAFE-CUTCut falso SOC>20%EV3 paro inesperado8Ruido CAN ID SOC3Filtro ID SOC + debounce 3 ciclos + OTA config372Log 10min sin falso cutWIRINGC5/C6 invertidoCAN_H/L short7Arnés mal ponchado2Color code C5 Yellow / C6 W/Yellow + test continuidad228Blueprint REV B TADEOWIRINGSCK18/MISO19/MOSI23 cruzadoMCP2515 no SPI7Breadboard error3Color Orange/Green/Blue + SCK18=18 MISO19=19 MOSI23=23242Test SPI loopbackPOWERTVS fail 12V spikeVCU quemado9Load dump Pesquería2SMAJ12A + Fuse 5A + PCB 4L AEC-Q100 -40/+125°C236Test surge ISO 7637OTAOTA brick GPIO4VCU no boot8Flash corrupt2Dual partition + rollback + GPIO4 Active LOW safe state232OTA test 10 ciclosRPN CRÍTICO <100 VALIDADO HIL:
-BUS-OFF 0x20: RPN 72 → Con control LAT 53.2ms baja a RPN 24SAFE-CUT SOC<20%: RPN 54 → Con GPIO4 <50ms baja a RPN 18Jitter: RPN 64 → Con 98ms avg baja a RPN 16Acción FASE 2 HIL 20 VCUs $850k MXN:
-10min CANoe log = evidencia DET 2 para todos los modos8 semanas onsite Pesquería = validación OCC real en línea EV3Toluca 2h = Contención inmediata si falla a 3am (vs Continental 10,000km)Firma:
-Norberto Bravo Tadeo
-MyAutoOS M-SHIELD VCU - Tier2
-23/Oct/2026
+# DFMEA - MyAutoOS M-SHIELD VCU - KIA EV3
+**Part:** MYAUTOOS-M-SHIELD-V1-18790-02850 - 20 VCUs HIL
+
+| Item | Failure Mode | Effect | SEV | Cause | OCC | Control | DET | RPN | Action HIL |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| CAN BUS | BUS-OFF EFL_TXBO 0x20 | VCU offline | 9 | Colision ID 0x100 vs BMS 100ms | 4 | LAT 53.2ms prime timing avoid collision | 2 | 72 | CANoe 10min Log 500Kbps |
+| CAN BUS | BUS-OFF no recovery | VCU stuck | 9 | No recovery | 3 | Recovery 500ms x3 auto-rejoin <200ms | 2 | 54 | Test real MCP2515 REG |
+| JITTER | Jitter >150ms | BMS desync | 8 | Timer bloqueante | 4 | Timer no bloqueante 98ms avg <150ms | 2 | 64 | CANoe histogram |
+| SAFE-CUT | SOC<20% no cut | Sobre-descarga Cell 34 | 9 | Logica SOC no leida | 3 | SAFE-CUT Cell 34 1A 0.8k GPIO4 LOW <50ms | 2 | 54 | Test Cell 34 1A real |
+| SAFE-CUT | Cut falso SOC>20% | Paro inesperado | 8 | Ruido CAN SOC | 3 | Filtro ID SOC + debounce 3 ciclos + OTA | 3 | 72 | Log 10min sin falso cut |
+| WIRING | C5/C6 invertido | CAN short | 7 | Arnes mal ponchado | 2 | Color C5 Yellow / C6 W/Yellow + continuidad | 2 | 28 | Blueprint REV B TADEO |
+| WIRING | SCK/MISO/MOSI cruzado | MCP2515 no SPI | 7 | Breadboard error | 3 | Orange/Green/Blue SCK18=18 MISO19=19 MOSI23=23 | 2 | 42 | Test SPI loopback |
+| POWER | TVS fail 12V spike | VCU quemado | 9 | Load dump | 2 | SMAJ12A + Fuse 5A + PCB 4L AEC-Q100 | 2 | 36 | Test ISO 7637 |
+| OTA | OTA brick | VCU no boot | 8 | Flash corrupt | 2 | Dual partition + rollback + GPIO4 safe | 2 | 32 | OTA 10 ciclos |
