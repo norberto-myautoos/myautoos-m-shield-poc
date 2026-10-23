@@ -1,9 +1,27 @@
-CONTROL PLAN - MyAutoOS M-SHIELD VCU - FASE 2 HIL 20 VCUs
-Supplier: Norberto Bravo Tadeo - Cherán, Michoacán - Toluca 2h to Pesquería
-Part: MYAUTOOS-M-SHIELD-V1-18790-02850 - KIA EV3
-Quantity: 20 VCUs = 0.08% planta = $850k MXN#ProcessCharacteristicSpecMethodSampleControlReaction10PCB Fab Lerma4L AEC-Q100 -40/+125°CIPC-A-600Visual + Micro20/20Supplier certScrap + reorder20SMD AssemblyESP32-S3 EYE $285 + MCP2515 $125Placement +/-0.1mmAOI20/20First articleRework Cherán30Wiring HarnessC5 Yellow CAN_H / C6 W/Y CAN_L18790-02850Continuity + Color20/20Blueprint REV B TADEORe-crimp40Wiring SPISCK18 Orange / MISO19 Green / MOSI23 Blue / CS5SPI 8MHzLoopback test20/20Color code + pinoutRe-wire50PowerA12 12V + TVS SMAJ12A + Fuse 5A / A1 GND12V +/-1V <50ms cutSurge test ISO763720/20Multimeter + ScopeReplace TVS60Flash FirmwareLAT 53.2ms ID 0x100 avoid BMS 100ms53.2ms prime timingCANoe timestamp20/20CANoe 10min LogRe-flash OTA70Jitter TestJitter avg 98ms <150ms limit<150msCANoe histogram20/20Non-blocking timerOptimize timer ISR80BUS-OFF TestEFL_TXBO 0x20 Real + Recovery 500ms x3<200ms recoveryMCP2515 REG CANINTF20/20Real fault injectionFirmware patch90SAFE-CUT TestSOC<20% Cell 34 1A 0.8k + GPIO4 Active LOW<50ms cutBMS emulator + Scope20/20Cell 34 1A realGPIO4 LOW + OTA config100OTA TestDual partition + rollback10 cycles no brickOTA flash + boot5/20Rollback testDual partition110Final HILCAN 500Kbps 8MHz HEV/KIA/BMW/BYD500KbpsdSPACE SCALEXIO Pesquería20/208 weeks onsiteOnsite 2h Toluca120Shipping20 VCUs boxed + docsPPAP Level 3Visual + PSW1 lotPSW signedReshipSPECIAL CHARACTERISTICS:
-CC (Critical): SAFE-CUT <50ms SOC<20% / BUS-OFF <200ms / TVS PowerSC (Significant): LAT 53.2ms / Jitter 98ms / Wiring colorsREACTION PLAN T-MEC:
-If failure at Pesquería line at 3am: Engineer on-site 2h from TolucaVs Continental: 10,000km ticket 3 daysContainment: Replace VCU from 20 stock + CANoe re-logCost $850k MXN includes:
-$380k CANoe + HIL rack$280k 8 weeks onsite engineering$120k PPAP docs (DFMEA + PSW + Control Plan + MSA)$70k Material 20 VCUs $645 MXN ea + logisticsApproved:
-Norberto Bravo Tadeo - MyAutoOS Tier2
-23/Oct/2026
+# CONTROL PLAN - MyAutoOS M-SHIELD VCU - FASE 2 HIL 20 VCUs
+**Supplier:** Norberto Bravo Tadeo - Cherán, Michoacán - Toluca 2h to Pesquería
+**Part:** MYAUTOOS-M-SHIELD-V1-18790-02850 - KIA EV3
+**Qty:** 20 VCUs = 0.08% planta = $850k MXN
+
+| # | Process | Characteristic | Spec | Method | Sample | Control | Reaction |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| 10 | PCB Fab Lerma | 4L AEC-Q100 -40/+125°C | IPC-A-600 | Visual + Micro | 20/20 | Supplier cert | Scrap + reorder |
+| 20 | SMD Assembly | ESP32-S3 EYE $285 + MCP2515 $125 | Placement +/-0.1mm | AOI | 20/20 | First article | Rework Cherán |
+| 30 | Wiring Harness | C5 Yellow CAN_H / C6 W/Y CAN_L | 18790-02850 | Continuity + Color | 20/20 | Blueprint REV B TADEO | Re-crimp |
+| 40 | Wiring SPI | SCK18 Orange / MISO19 Green / MOSI23 Blue / CS5 | SPI 8MHz | Loopback test | 20/20 | Color code + pinout | Re-wire |
+| 50 | Power | A12 12V + TVS SMAJ12A + Fuse 5A / A1 GND | 12V +/-1V <50ms cut | Surge test ISO7637 | 20/20 | Multimeter + Scope | Replace TVS |
+| 60 | Flash Firmware | LAT 53.2ms ID 0x100 avoid BMS 100ms | 53.2ms prime timing | CANoe timestamp | 20/20 | CANoe 10min Log | Re-flash OTA |
+| 70 | Jitter Test | Jitter avg 98ms <150ms limit | <150ms | CANoe histogram | 20/20 | Non-blocking timer | Optimize timer ISR |
+| 80 | BUS-OFF Test | EFL_TXBO 0x20 Real + Recovery 500ms x3 | <200ms recovery | MCP2515 REG CANINTF | 20/20 | Real fault injection | Firmware patch |
+| 90 | SAFE-CUT Test | SOC<20% Cell 34 1A 0.8k + GPIO4 Active LOW | <50ms cut | BMS emulator + Scope | 20/20 | Cell 34 1A real | GPIO4 LOW + OTA config |
+| 100 | OTA Test | Dual partition + rollback | 10 cycles no brick | OTA flash + boot | 5/20 | Rollback test | Dual partition |
+| 110 | Final HIL | CAN 500Kbps 8MHz HEV/KIA/BMW/BYD | 500Kbps | dSPACE SCALEXIO Pesquería | 20/20 | 8 weeks onsite | Onsite 2h Toluca |
+| 120 | Shipping | 20 VCUs boxed + docs | PPAP Level 3 | Visual + PSW | 1 lot | PSW signed | Reship |
+
+**SPECIAL CHARACTERISTICS:**
+- CC: SAFE-CUT <50ms SOC<20% / BUS-OFF <200ms / TVS Power
+- SC: LAT 53.2ms / Jitter 98ms / Wiring colors
+
+**REACTION PLAN T-MEC:** If failure 3am - Engineer on-site 2h Toluca vs Continental 10,000km ticket 3 days
+
+**Cost $850k MXN:** $380k CANoe + $280k 8 weeks onsite + $120k PPAP docs + $70k Material 20 VCUs
