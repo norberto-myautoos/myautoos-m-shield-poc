@@ -35,6 +35,34 @@
 
 Licencia por VIN: $400 USD/VIN - Fase 4: 500 VCUs = $21.25M MXN/mes
 
+# myautoos-m-shield-poc 🛡️
+
+![ESP32](https://img.shields.io/badge/ESP32-DevKitV1-blue)
+![Platform](https://img.shields.io/badge/Platform-Wokwi-green)
+![Timer](https://img.shields.io/badge/Timer-53ms-orange)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+Banco seguro para ESP32 DevKit V1 - Core 3.3.12 - Chilchota, Mich.
+PoC educativo con timer de 53ms no bloqueante.
+
+### 🎯 Objetivo
+Probar 2 LEDs + 1 botón con `millis()` sin `delay()`. Compilación <15% Flash. Solo protoboard, seguro y reutilizable.
+
+### 🔌 Conexiones
+| Componente | Pin ESP32 | Nota |
+| :--- | :--- | :--- |
+| LED Azul | GPIO2 | + 220Ω → GND - Parpadea cada 53ms |
+| LED Rojo | GPIO4 | + 220Ω → GND |
+| Botón | GPIO15 | → GND - INPUT_PULLUP |
+
+> ⚠️ ESP32 es 3.3V - Siempre usa resistencia de 220Ω para LEDs.
+
+### 💻 Código
+Archivo: `esp32-banco-53ms.ino`
+- LED Azul: timer 53ms con millis()
+- LED Rojo: ON al presionar GPIO15
+- Serial: 115200 baud
+
 ## ESTADO
 
 Fase 3 HIL: En financiamiento NAFIN $45k MXN - PO Kia $850k MXN en proceso
