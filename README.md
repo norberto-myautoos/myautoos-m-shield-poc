@@ -85,6 +85,15 @@ Proyecto de práctica con ESP32 DevKit V1 para validar entorno Arduino Core 3.3.
 - Uso aproximado: <15% Flash
 - Sin librerías externas
 
+  ## KIA EV3 Pesquería NL Ready - Por Norberto Bravo Tadeo
+
+![OnePager](docs/onepager-kia-pesqueria-TADEO-FINAL.png)
+![Harness](docs/kia-ev3-pesqueria-harness-TADEO-REV-B.png)
+
+**Engineer:** Norberto Bravo Tadeo | **Location:** Cherán, Michoacán Purépecha
+**Validation:** 53.2ms | Jitter 98ms | SAFE-CUT <50ms | BUS-OFF <200ms
+**Proposal:** 20 VCUs $850k MXN | MOBIS Pesquería HIL Ready
+
 ## Wokwi
 Incluye diagram.json para simular sin hardware físico.
 
