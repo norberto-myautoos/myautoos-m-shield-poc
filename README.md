@@ -23,6 +23,41 @@ Log: `docs/CANoe_Logs_10min.asc`
 ## 🔌 WIRING KIA EV3 18790-02850 REV B TADEO
 
 | Signal | Pin | Color | Spec |
+
+
+## 💰 BOM T-MEC
+
+| Item | Proto | Prod 100k |
+| :--- | :--- | :--- |
+| ESP32 S3 EYE | $285 MXN | $3.5 USD |
+| MCP2515 | $125 MXN | $1.2 USD |
+| PCB 4L Lerma | $90 MXN | $2.8 USD |
+| Conn 28P AMPSEAL | $210 MXN | $4.5 USD |
+| **TOTAL** | **$645 MXN** | **$16 USD** |
+| vs BOSCH | $42,500 MXN | $2,500 USD + 8 meses |
+| Ahorro | 65x 98.5% | 65x 98.5% |
+
+## 🏭 HIL $850k MXN
+
+- $380k CANoe License 10min log
+- $280k 8 weeks dSPACE Pesquería
+- $120k PPAP L3 docs
+- $70k Material 20 VCUs
+- Capacity 20 VCUs 0.08% planta
+- Advantage: Failure 3am onsite 2h Toluca vs Continental 10,000km 3 days
+
+## 🛠️ BUILD
+
+```bash
+# Wokwi
+Open Wokwi/diagram.json
+
+# HW
+Flash src/ via ESP-IDF - CAN 500Kbps 8MHz
+
+ Tier2 ReadyNorberto Bravo Tadeo - MyAutoOS - Tier2 Local HIL
+Repo: github.com/norberto-myautoos/myautoos-m-shield-poc
+PPAP L3 READY - For KIA Pesquería Engineering Review
 | :--- | :--- | :--- | :--- |
 | CAN_H | C5 | Yellow | 18790-02850 |
 | CAN_L | C6 | White/Yellow | 18790-02850 |
