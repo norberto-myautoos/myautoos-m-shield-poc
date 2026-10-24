@@ -1,7 +1,7 @@
 # MyAutoOS M-SHIELD VCU - KIA EV3 18790-02850
 ### PPAP L3 READY | 20 VCUs 0.08% | $850k MXN HIL | LAT 53.2ms | Tier2 Local
 
-**Engineer:** Norberto Bravo Tadeo - Cherán / Toluca 2h Pesquería
+**Engineer:** Norberto Bravo Tadeo - Cherán / Pesquería
 **Part:** MYAUTOOS-M-SHIELD-V1-18790-02850
 **Cost:** $645 MXN Proto = $16 USD Prod vs Bosch $2,500 = 65x = 98.5% ahorro
 
