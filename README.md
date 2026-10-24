@@ -34,5 +34,5 @@ Log: `docs/CANoe_Logs_10min.asc`
 | 12V | A12 | - | TVS SMAJ12A Fuse 5A |
 | GND | A1 | - | PCB 4L AEC-Q100 -40/+125C |
 
-## 📁 ESTRUCTURA ASIL-D
+
 
