@@ -1,0 +1,32 @@
+# ESP32 Banco de Pruebas - Timer 53ms
+
+Proyecto de práctica con ESP32 DevKit V1 para validar entorno Arduino Core 3.3.12
+
+## Hardware
+- ESP32 Dev Module
+- LED Azul -> Pin 2 (LED_STATUS)
+- LED Rojo -> Pin 4
+- Botón -> Pin 15 (INPUT_PULLUP a GND)
+
+## Funciones
+- Timer no bloqueante de 53ms usando millis()
+- Parpadeo de LED en pin 2 cada 53ms
+- Lectura de botón en pin 15
+- Control de LED en pin 4
+- Debug por Serial 115200 bps
+
+## Compilación
+- Board: ESP32 Dev Module
+- Core: 3.3.12
+- Uso aproximado: <15% Flash
+- Sin librerías externas
+
+## Wokwi
+Incluye diagram.json para simular sin hardware físico.
+
+## Autor
+Norberto - Cheran, Michoacán
+Taller de electrónica
+
+## Licencia
+MIT - Uso educativo / banco de prueba
