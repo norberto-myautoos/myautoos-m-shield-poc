@@ -1,73 +1,52 @@
-# MyAutoOS M-SHIELD VCU - KIA EV3 18790-02850
-### PPAP L3 READY | 20 VCUs 0.08% | $850k MXN HIL | LAT 53.2ms | Tier2 Local
+# MyAutoOS M-SHIELD
 
-**Engineer:** Norberto Bravo Tadeo - Cherán / Pesquería
-**Part:** MYAUTOOS-M-SHIELD-V1-18790-02850
-**Cost:** $645 MXN Proto = $16 USD Prod vs Bosch $2,500 = 65x = 98.5% ahorro
+Firmware de referencia en C para una unidad de control de vehículo (VCU) eléctrico: gestión de fallas en bus CAN y una simulación de la lógica de control con pruebas automatizadas.
 
----
+> **Estado: prueba de concepto y simulación.** No está certificado (ISO 26262, IATF 16949, PPAP), no ha sido aprobado por ningún fabricante y **no es apto para uso en vehículos**. Las clasificaciones de seguridad (HARA) son un borrador para validar con un ingeniero de seguridad funcional.
 
-## 📊 VALIDACIÓN CANoe 10min - ASIL-D
+## Contenido
 
-| Metric | Value | Limit | Status |
-| :--- | :--- | :--- | :--- |
-| LAT Prime | 53.2ms ID 0x101 | Avoid BMS 0x100 100ms | ✅ PASS |
-| Jitter Avg | 98ms | <150ms | ✅ PASS |
-| BUS-OFF | EFL_TXBO 0x20 Real | Recovery 500ms x3 <200ms | ✅ PASS |
-| SAFE-CUT | SOC<20% Cell34 1A 0.8k | GPIO4 LOW <50ms | ✅ PASS |
-| CAN Bitrate | 500Kbps | SPI 8MHz | ✅ PASS |
-| Power | A12 12V TVS SMAJ12A Fuse 5A | ISO7637 | ✅ PASS |
+| Carpeta | Qué es |
+|---|---|
+| `core/` | Núcleo para ESP32 + MCP2515: Bus-Off (EFLG TXBO 0x20) con reintentos, slot de TX sincronizado con el BMS, SAFE-CUT latcheado, compuerta OTA, driver MCP2515 |
+| `sim/` | Simulación SIL de la VCU: máquina de estados con precarga, arbitraje de torque, diagnóstico, regeneración limitada, colisión con descarga activa y monitor independiente |
+| `sim/dbc/` | DBC de ejemplo didáctico (no corresponde a ningún vehículo real) |
+| `docs/` | Requisitos de seguridad, trazabilidad y decisiones abiertas |
 
-Log: `docs/CANoe_Logs_10min.asc`
+## Cómo ejecutar
 
-## 🔌 WIRING KIA EV3 18790-02850 REV B TADEO
+```
+make test       # pruebas del núcleo (HAL simulada) y banco SIL
+make coverage   # cobertura de líneas y ramas con gcov (módulos de sim/)
+```
+Opciones: `CC=clang`, `EXTRA=-Werror`, `BUILD=/ruta`. Requiere un compilador C99 y `make`.
 
-| Signal | Pin | Color | Spec |
+## Qué está verificado hoy
 
+- `core/`: 35 verificaciones unitarias en host con HAL simulada.
+- `sim/`: 11 casos de prueba automatizados (encendido seguro, precarga, Brake Override, pérdida de BMS detenido y en marcha, plausibilidad de pedal, torque solo en READY, regeneración limitada, colisión con descarga activa, monitor independiente). Cobertura de líneas entre 95 % y 100 %.
+- Los casos se validaron también con **pruebas de mutación**: al romper cada función de seguridad a propósito, las pruebas fallan.
 
-## 💰 BOM T-MEC
+## Qué NO está verificado
 
-| Item | Proto | Prod 100k |
-| :--- | :--- | :--- |
-| ESP32 S3 EYE | $285 MXN | $3.5 USD |
-| MCP2515 | $125 MXN | $1.2 USD |
-| PCB 4L Lerma | $90 MXN | $2.8 USD |
-| Conn 28P AMPSEAL | $210 MXN | $4.5 USD |
-| **TOTAL** | **$645 MXN** | **$16 USD** |
-| vs BOSCH | $42,500 MXN | $2,500 USD + 8 meses |
-| Ahorro | 65x 98.5% | 65x 98.5% |
+- Ninguna prueba en hardware real (HIL) ni en vehículo. La simulación no cubre temporización real, ruido eléctrico ni el comportamiento de los contactores.
+- Las mediciones de latencia y jitter del PoC se publicarán con su log CANoe y su método; mientras tanto no se citan cifras aquí.
+- El monitor independiente (FSR-07) es una re-implementación diversa **en el mismo programa**. Un diseño real lo ejecuta en otro núcleo o chip con vía de corte propia.
+- No implementado: diagnóstico UDS con DTCs, térmico y carga, OTA seguro (solo existe la compuerta), secuencia de apagado, ciberseguridad.
 
-## 🏭 HIL $850k MXN
+## Pines (ESP32 clásico, PoC)
 
-- $380k CANoe License 10min log
-- $280k 8 weeks dSPACE Pesquería
-- $120k PPAP L3 docs
-- $70k Material 20 VCUs
-- Capacity 20 VCUs 0.08% planta
-- Advantage: Failure 3am onsite 2h Toluca vs Continental 10,000km 3 days
+SCK 18, MISO 19, MOSI 23, CS 5, SAFE-CUT GPIO4 (activo en BAJO). **No válidos en ESP32-S3**: allí no existen los GPIO22–25 y los GPIO19/20 son USB.
 
-## 🛠️ BUILD
+## Documentación
 
-```bash
-# Wokwi
-Open Wokwi/diagram.json
+- [`docs/SAFETY_REQUIREMENTS.md`](docs/SAFETY_REQUIREMENTS.md): metas de seguridad y requisitos funcionales
+- [`docs/TRACEABILITY.md`](docs/TRACEABILITY.md): requisito → código → prueba
+- [`docs/DECISIONS.md`](docs/DECISIONS.md): decisiones abiertas (ciclo del BMS, licencia, criterios de descarga, etc.)
 
-# HW
-Flash src/ via ESP-IDF - CAN 500Kbps 8MHz
+## Política de afirmaciones
 
- Tier2 ReadyNorberto Bravo Tadeo - MyAutoOS - Tier2 Local HIL
-Repo: github.com/norberto-myautoos/myautoos-m-shield-poc
-PPAP L3 READY - For KIA Pesquería Engineering Review
-| :--- | :--- | :--- | :--- |
-| CAN_H | C5 | Yellow | 18790-02850 |
-| CAN_L | C6 | White/Yellow | 18790-02850 |
-| SCK | 18 | Orange | SPI 8MHz |
-| MISO | 19 | Green | SPI 8MHz |
-| MOSI | 23 | Blue | SPI 8MHz |
-| CS | 5 | - | MCP2515 |
-| SAFE-CUT | 4 | GPIO4 Active LOW <50ms | SOC<20% |
-| 12V | A12 | - | TVS SMAJ12A Fuse 5A |
-| GND | A1 | - | PCB 4L AEC-Q100 -40/+125C |
+Toda cifra o cumplimiento citado en este proyecto debe tener detrás un log, un reporte o un certificado con su método. Lo que es objetivo se marca como objetivo.
 
 
 
