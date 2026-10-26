@@ -1,0 +1,74 @@
+VERSION "example-0.1 - EJEMPLO DIDACTICO, no es un DBC de ningun vehiculo real"
+
+NS_ :
+
+BS_:
+
+BU_: VCU BMS INV PEDALS
+
+BO_ 256 BMS_Status: 8 BMS
+ SG_ BMS_Alive : 0|4@1+ (1,0) [0|15] "" VCU
+ SG_ BMS_SOC : 8|8@1+ (0.5,0) [0|100] "%" VCU
+ SG_ BMS_PackVoltage : 16|16@1+ (0.1,0) [0|1000] "V" VCU,INV
+ SG_ BMS_PackCurrent : 32|16@1- (0.1,0) [-1000|1000] "A" VCU
+ SG_ BMS_FbNeg : 48|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_FbPos : 49|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_FbPrecharge : 50|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_Fault : 51|1@1+ (1,0) [0|1] "" VCU
+ SG_ BMS_CRC : 56|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 257 VCU_Command: 8 VCU
+ SG_ VCU_Alive : 0|4@1+ (1,0) [0|15] "" INV,BMS
+ SG_ VCU_State : 4|4@1+ (1,0) [0|15] "" INV,BMS
+ SG_ VCU_TorqueCmd : 8|16@1- (0.1,0) [-400|400] "Nm" INV
+ SG_ VCU_CmdNeg : 24|1@1+ (1,0) [0|1] "" BMS
+ SG_ VCU_CmdPos : 25|1@1+ (1,0) [0|1] "" BMS
+ SG_ VCU_CmdPrecharge : 26|1@1+ (1,0) [0|1] "" BMS
+ SG_ VCU_FaultActive : 27|1@1+ (1,0) [0|1] "" INV,BMS
+ SG_ VCU_CRC : 56|8@1+ (1,0) [0|255] "" INV,BMS
+
+BO_ 258 BMS_Limits: 8 BMS
+ SG_ BMS_MaxChargePower : 0|12@1+ (0.1,0) [0|400] "kW" VCU
+ SG_ BMS_MaxDischargePower : 12|12@1+ (0.1,0) [0|400] "kW" VCU
+ SG_ BMS_Limits_Alive : 24|4@1+ (1,0) [0|15] "" VCU
+ SG_ BMS_Limits_CRC : 56|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 512 INV_Status: 8 INV
+ SG_ INV_MotorSpeed : 0|16@1- (1,0) [-20000|20000] "rpm" VCU
+ SG_ INV_MotorTorque : 16|16@1- (0.1,0) [-400|400] "Nm" VCU
+ SG_ INV_Temp : 32|8@1+ (1,-40) [-40|215] "degC" VCU
+ SG_ INV_Fault : 40|1@1+ (1,0) [0|1] "" VCU
+ SG_ INV_Alive : 48|4@1+ (1,0) [0|15] "" VCU
+ SG_ INV_CRC : 56|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 768 Pedal_Status: 8 PEDALS
+ SG_ Accel1 : 0|10@1+ (0.1,0) [0|100] "%" VCU
+ SG_ Accel2 : 10|10@1+ (0.1,0) [0|100] "%" VCU
+ SG_ Brake : 20|10@1+ (0.1,0) [0|100] "%" VCU
+ SG_ BrakeSwitch : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ Pedal_Alive : 32|4@1+ (1,0) [0|15] "" VCU
+ SG_ Pedal_CRC : 56|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1024 VCU_Diag: 8 VCU
+ SG_ Diag_CanTimeout : 0|1@1+ (1,0) [0|1] "" INV
+ SG_ Diag_PrechargeTimeout : 1|1@1+ (1,0) [0|1] "" INV
+ SG_ Diag_Alive : 8|4@1+ (1,0) [0|15] "" INV
+
+CM_ BO_ 256 "BMS cada 10 ms = BMS_CYCLE_MS en vcu_diagnostics.h (timeout = 5 ciclos). El nucleo M-SHIELD usa 100 ms: confirmar con la especificacion real del BMS.";
+CM_ SG_ 258 BMS_MaxChargePower "La VCU convierte potencia a torque maximo de regeneracion: T = P / w (FSR-06).";
+CM_ SG_ 257 VCU_TorqueCmd "Positivo = traccion, negativo = regeneracion. Limites de ejemplo.";
+CM_ SG_ 768 Accel2 "Segundo sensor del acelerador para plausibilidad (FSR-02).";
+
+BA_DEF_ "BusType" STRING ;
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535;
+BA_DEF_DEF_ "BusType" "CAN";
+BA_DEF_DEF_ "GenMsgCycleTime" 0;
+BA_ "BusType" "CAN";
+BA_ "GenMsgCycleTime" BO_ 256 10;
+BA_ "GenMsgCycleTime" BO_ 257 10;
+BA_ "GenMsgCycleTime" BO_ 258 10;
+BA_ "GenMsgCycleTime" BO_ 512 10;
+BA_ "GenMsgCycleTime" BO_ 768 10;
+BA_ "GenMsgCycleTime" BO_ 1024 100;
+
+VAL_ 257 VCU_State 0 "INIT" 1 "STANDBY" 2 "PRECHARGE" 3 "READY_TO_DRIVE" 4 "FAULT";
